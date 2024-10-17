@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-
 import '../../utils/constants.dart';
 import 'components/card_model.dart';
 
 
-class HomeView extends StatelessWidget {
-  const HomeView({super.key});
+
+
+class StudentsView extends StatelessWidget {
+  const StudentsView({super.key});
 
   @override
   Widget build(BuildContext context) {

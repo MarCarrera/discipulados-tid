@@ -4,6 +4,7 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
 
 import 'utils/constants.dart';
+import 'views/students/students_view.dart';
 
 void main() => runApp(MaterialApp(
     builder: (context, child) {
@@ -22,19 +23,16 @@ class Example extends StatefulWidget {
 }
 
 class _ExampleState extends State<Example> {
-  int _selectedIndex = 1;
+  int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.w600);
   static const List<Widget> _widgetOptions = <Widget>[
     HomeView(),
     Text(
-      'Estudiantes',
-      style: optionStyle,
-    ),
-    Text(
       'Maestros',
       style: optionStyle,
     ),
+    StudentsView()
   ];
 
   @override
@@ -49,7 +47,10 @@ class _ExampleState extends State<Example> {
         appBar: AppBar(
           title: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text('Buenos dias Daniela', style: TextStyle(fontSize: fontSize * 1.18),),
+            child:  _selectedIndex == 0 ?
+            Text( 'Buenos dias Daniela', style: TextStyle(fontSize: fontSize * 1.18),)
+            :  _selectedIndex == 1 ? Text( 'Maestros', style: TextStyle(fontSize: fontSize * 1.18),)
+            : Text( 'Alumnos', style: TextStyle(fontSize: fontSize * 1.18),),
           ),
           actions: [
             Padding(
