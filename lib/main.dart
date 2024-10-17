@@ -28,11 +28,12 @@ class _ExampleState extends State<Example> {
       TextStyle(fontSize: 30, fontWeight: FontWeight.w600);
   static const List<Widget> _widgetOptions = <Widget>[
     HomeView(),
+    
+    StudentsView(),
     Text(
       'Maestros',
       style: optionStyle,
     ),
-    StudentsView()
   ];
 
   @override
