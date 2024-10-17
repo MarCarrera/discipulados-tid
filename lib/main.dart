@@ -1,68 +1,114 @@
+import 'package:discipulos_tid/views/home/home_view.dart';
 import 'package:flutter/material.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:line_icons/line_icons.dart';
 
 import 'utils/constants.dart';
 
-void main() => runApp(const MyApp());
+void main() => runApp(MaterialApp(
+    builder: (context, child) {
+      return Directionality(textDirection: TextDirection.ltr, child: child!);
+    },
+    title: 'GNav',
+    theme: ThemeData(
+      primaryColor: Colors.grey[800],
+    ),
+    debugShowCheckedModeBanner: false,
+    home: Example()));
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class Example extends StatefulWidget {
+  @override
+  _ExampleState createState() => _ExampleState();
+}
+
+class _ExampleState extends State<Example> {
+  int _selectedIndex = 1;
+  static const TextStyle optionStyle =
+      TextStyle(fontSize: 30, fontWeight: FontWeight.w600);
+  static const List<Widget> _widgetOptions = <Widget>[
+    HomeView(),
+    Text(
+      'Estudiantes',
+      style: optionStyle,
+    ),
+    Text(
+      'Maestros',
+      style: optionStyle,
+    ),
+  ];
 
   @override
   Widget build(BuildContext context) {
     double screenHeight = Constants.getScreenHeight(context);
     double screenWidth = Constants.getScreenWidth(context);
     double fontSize = Constants.getFontSize(context);
-
+    
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Discipulos TID',
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Buenos dias Daniela'),
+          title: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text('Buenos dias Daniela', style: TextStyle(fontSize: fontSize * 1.18),),
+          ),
           actions: [
-            Icon(Icons.more_vert)
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Icon(Icons.more_vert),
+            )
           ],
         ),
+        
         body: Center(
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                CardModel(screenHeight: screenHeight, screenWidth: screenWidth),
-                CardModel(screenHeight: screenHeight, screenWidth: screenWidth),
-                CardModel(screenHeight: screenHeight, screenWidth: screenWidth),
-                CardModel(screenHeight: screenHeight, screenWidth: screenWidth),
-              ],
+          child: _widgetOptions.elementAt(_selectedIndex),
+        ),
+        bottomNavigationBar: Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                blurRadius: 20,
+                color: Colors.black.withOpacity(.1),
+              )
+            ],
+          ),
+          child: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
+              child: GNav(
+                rippleColor: Colors.grey[300]!,
+                hoverColor: Colors.grey[100]!,
+                gap: 8,
+                activeColor: Colors.black,
+                iconSize: 24,
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                duration: Duration(milliseconds: 400),
+                tabBackgroundColor: Colors.grey[100]!,
+                color: Colors.black,
+                tabs: [
+                  GButton(
+                    icon: LineIcons.home,
+                    text: 'Inicio',
+                  ),
+                  GButton(
+                    icon: LineIcons.search,
+                    text: 'Estudiantes',
+                  ),
+                  GButton(
+                    icon: LineIcons.user,
+                    text: 'Maestros',
+                  ),
+                ],
+                selectedIndex: _selectedIndex,
+                onTabChange: (index) {
+                  setState(() {
+                    _selectedIndex = index;
+                  });
+                },
+              ),
             ),
-          )
+          ),
         ),
-      ),
-    );
-  }
-}
-
-class CardModel extends StatelessWidget {
-  const CardModel({
-    super.key,
-    required this.screenHeight,
-    required this.screenWidth,
-  });
-
-  final double screenHeight;
-  final double screenWidth;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(
-        height: screenHeight * 0.22,
-        width: screenWidth * 0.9,
-        decoration: BoxDecoration(
-          color: Constants.cardColor,
-          borderRadius: BorderRadius.circular(24)
-          
-        ),
-        child: Text('DATA'),
       ),
     );
   }
