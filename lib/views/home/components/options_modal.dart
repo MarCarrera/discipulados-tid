@@ -1,4 +1,7 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
+import 'add_user_view.dart';
 
 class OptionsModal extends StatelessWidget {
   const OptionsModal({
@@ -13,17 +16,22 @@ class OptionsModal extends StatelessWidget {
       actions: <Widget>[
         CupertinoActionSheetAction(
           onPressed: () {
-            // Acción 1
-            Navigator.pop(context);
+            Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => AddUserView(),
+                        ),
+                      );
+                    
           },
-          child: Text('Opción 1'),
+          child: Text('Agregar usuario'),
         ),
         CupertinoActionSheetAction(
           onPressed: () {
             // Acción 2
             Navigator.pop(context);
           },
-          child: Text('Opción 2'),
+          child: Text('Cerrar sesión'),
         ),
       ],
       cancelButton: CupertinoActionSheetAction(

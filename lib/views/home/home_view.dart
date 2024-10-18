@@ -3,8 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../utils/constants.dart';
+import 'add_view.dart';
 import 'components/card_model.dart';
-
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -13,52 +13,46 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     double screenHeight = Constants.getScreenHeight(context);
     double screenWidth = Constants.getScreenWidth(context);
-   double fontSize = Constants.getFontSize(context);
+    double fontSize = Constants.getFontSize(context);
 
     return Scaffold(
         body: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Column(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Padding(
-  padding: const EdgeInsets.symmetric(horizontal: 20),
-  child: Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: [
-      Text(
-        'Taller de Jovenes 2', 
-        style: TextStyle(fontSize: fontSize * 1.04),
-      ),
-      CupertinoButton(
-        padding: EdgeInsets.zero, // Elimina el padding por defecto del botón
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => StudentsView(),
-            ),
-          );
-        },
-        child: Text(
-          'Nuevo reporte',
-          style: TextStyle(fontSize: fontSize * 1.04),
-        ),
-      ),
-    ],
-  ),
-),
-
-
-                  CardModel(screenHeight: screenHeight, screenWidth: screenWidth),
-                  CardModel(screenHeight: screenHeight, screenWidth: screenWidth),
-                  CardModel(screenHeight: screenHeight, screenWidth: screenWidth),
-                  CardModel(screenHeight: screenHeight, screenWidth: screenWidth),
+                  Text(
+                    'Taller de Jovenes 2',
+                    style: TextStyle(fontSize: fontSize * 1.04),
+                  ),
+                  CupertinoButton(
+                    padding: EdgeInsets
+                        .zero, // Elimina el padding por defecto del botón
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => AddView(),
+                        ),
+                      );
+                    },
+                    child: Icon(Icons.edit_document),
+                  ),
                 ],
               ),
             ),
-          )
-      );
+            CardModel(screenHeight: screenHeight, screenWidth: screenWidth),
+            CardModel(screenHeight: screenHeight, screenWidth: screenWidth),
+            CardModel(screenHeight: screenHeight, screenWidth: screenWidth),
+            CardModel(screenHeight: screenHeight, screenWidth: screenWidth),
+          ],
+        ),
+      ),
+    ));
   }
 }
-
