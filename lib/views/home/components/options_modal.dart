@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import 'add_user_view.dart';
 
 class OptionsModal extends StatelessWidget {
