@@ -1,9 +1,11 @@
 import 'package:discipulos_tid/views/home/home_view.dart';
+import 'package:discipulos_tid/views/teachers/teacher_view.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
-
 import 'utils/constants.dart';
+import 'views/home/components/options_modal.dart';
 import 'views/students/students_view.dart';
 
 void main() => runApp(MaterialApp(
@@ -28,12 +30,8 @@ class _ExampleState extends State<Example> {
       TextStyle(fontSize: 30, fontWeight: FontWeight.w600);
   static const List<Widget> _widgetOptions = <Widget>[
     HomeView(),
-    
     StudentsView(),
-    Text(
-      'Maestros',
-      style: optionStyle,
-    ),
+    TeacherView()
   ];
 
   @override
@@ -50,15 +48,26 @@ class _ExampleState extends State<Example> {
             padding: const EdgeInsets.all(8.0),
             child:  _selectedIndex == 0 ?
             Text( 'Buenos dias Daniela', style: TextStyle(fontSize: fontSize * 1.18),)
-            :  _selectedIndex == 1 ? Text( 'Maestros', style: TextStyle(fontSize: fontSize * 1.18),)
-            : Text( 'Alumnos', style: TextStyle(fontSize: fontSize * 1.18),),
+            :  _selectedIndex == 1 ? Text( 'Alumnos', style: TextStyle(fontSize: fontSize * 1.18),)
+            : Text( 'Maestros', style: TextStyle(fontSize: fontSize * 1.18),),
           ),
           actions: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Icon(Icons.more_vert),
-            )
-          ],
+  GestureDetector(
+    onTap: () {
+      showCupertinoModalPopup(
+        context: context,
+        builder: (BuildContext context) {
+          return OptionsModal();
+        },
+      );
+    },
+    child: Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Icon(Icons.more_vert),
+    ),
+  ),
+],
+
         ),
         
         body: Center(
@@ -94,7 +103,7 @@ class _ExampleState extends State<Example> {
                   ),
                   GButton(
                     icon: LineIcons.search,
-                    text: 'Estudiantes',
+                    text: 'Alumnos',
                   ),
                   GButton(
                     icon: LineIcons.user,
@@ -115,3 +124,5 @@ class _ExampleState extends State<Example> {
     );
   }
 }
+
+

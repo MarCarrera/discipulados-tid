@@ -36,7 +36,7 @@ class CardModel extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                Text('Marisol', style: TextStyle(color: Colors.black, fontSize: fontSize * 1 ),),
+                Text('Daniela', style: TextStyle(color: Colors.black, fontSize: fontSize * 1 ),),
                 Text('Trujillo Hernández', style: TextStyle(color: Colors.black, fontSize: fontSize * 1 ),),
               ],),
               Row(
